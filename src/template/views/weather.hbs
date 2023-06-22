@@ -1,0 +1,90 @@
+<html lang="en">
+  <head>
+    {{>headerlinks}}
+  </head>
+  <body>
+    {{>navbar}}
+
+    <!-- main header -->
+
+    <div class="container-fluid main_header">
+      <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+
+           <div class="main_content">
+            <form class="temp_form">
+                <input type="text" id="cityName" placeholder="Enter your City name" autocomplete="off">
+                <input type="submit" value="search" id="submitBtn">
+            </form>
+           </div> 
+
+           <div class="tempInformation">
+            <div class="top_layer">
+                <p id="day">Tuesday</p>
+                <p id="today_data">13 OCT</p>
+                <p id="current-time"></p>
+            </div>
+            <div class="main_layer">
+                <p id="city_name">Get Output</p>
+
+              <div class="middle_layer data_hide">
+                <p id="temp"><span id="temp_real_val">0</span><sup>o</sup>C</p>
+                <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+              </div>  
+            </div>
+           </div>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- footer code -->
+
+    <script src="js/main.js"></script>
+
+    <script>
+
+
+            const getCurrentDay = () => {
+            var weekday = new Array(7);
+            weekday[0] = "SUN";
+            weekday[1] = "MON";
+            weekday[2] = "TUE";
+            weekday[3] = "WED";
+            weekday[4] = "THU";
+            weekday[5] = "FRI";
+            weekday[6] = "SAT";
+
+            let currentTime = new Date();
+            days =weekday[currentTime.getDay()];
+            let day= document.getElementById('day');
+            day.innerText = days;
+        };
+        getCurrentDay();
+          const months = [
+                    "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+                ];
+
+          const currentDate = new Date();
+          const day = currentDate.getDate();
+          const monthIndex = currentDate.getMonth();
+          const year = currentDate.getFullYear();
+          const monthName = months[monthIndex];
+          const dateString = `${day} ${monthName} ${year}`;
+          const dateElement = document.getElementById('today_data');
+          dateElement.textContent = dateString;
+           const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
+
+        // Use a ternary operator to add a leading zero to minutes/seconds when they are less than 10
+        const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        document.getElementById("current-time").textContent = formattedTime;
+
+    </script>
+
+    {{>footer}}
+
+  </body>
+</html>
